@@ -30,6 +30,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { Not403Component } from './pages/not403/not403.component';
 import { RecuperarComponent } from './pages/login/recuperar/recuperar.component';
 import { TokenComponent } from './pages/login/recuperar/token/token.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 export function tokenGetter(){
   let tk = sessionStorage.getItem(environment.TOKEN_NAME);
@@ -56,7 +57,8 @@ export function tokenGetter(){
     LoginComponent,
     Not403Component,
     RecuperarComponent,
-    TokenComponent    
+    TokenComponent,
+    PerfilComponent    
   ],
   entryComponents: [MedicoDialogoComponent, DialogoComponentComponent],
   imports: [

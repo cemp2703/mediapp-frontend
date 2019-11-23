@@ -1,7 +1,7 @@
 import { MatPaginatorImpl } from './mat-paginator';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSortModule, MatPaginatorModule, MatCardModule, MatSnackBarModule, MatSidenavModule, MatMenuModule, MatToolbarModule, MatDividerModule, MatDialogModule, MatPaginatorIntl, MatCheckboxModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatExpansionModule, MatAutocompleteModule, MatStepperModule, MatSlideToggleModule, MatGridListModule, MatProgressBarModule } from '@angular/material';
+import { MatTableModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSortModule, MatPaginatorModule, MatCardModule, MatSnackBarModule, MatSidenavModule, MatMenuModule, MatToolbarModule, MatDividerModule, MatDialogModule, MatPaginatorIntl, MatCheckboxModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatExpansionModule, MatAutocompleteModule, MatStepperModule, MatSlideToggleModule, MatGridListModule, MatProgressBarModule, MatListModule } from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -30,7 +30,8 @@ import { MatTableModule, MatButtonModule, MatFormFieldModule, MatInputModule, Ma
     MatStepperModule,
     MatSlideToggleModule,
     MatGridListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatListModule
   ],exports:[
     MatButtonModule,
     MatTableModule,
@@ -55,7 +56,8 @@ import { MatTableModule, MatButtonModule, MatFormFieldModule, MatInputModule, Ma
     MatStepperModule,
     MatSlideToggleModule,
     MatGridListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatListModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorImpl},

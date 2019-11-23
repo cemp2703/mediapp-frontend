@@ -1,3 +1,4 @@
+import { PerfilComponent } from './pages/perfil/perfil.component';
 import { TokenComponent } from './pages/login/recuperar/token/token.component';
 import { RecuperarComponent } from './pages/login/recuperar/recuperar.component';
 import { Not403Component } from './pages/not403/not403.component';
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'consulta-wizard', component: WizardComponent, canActivate: [GuardService] },
   { path: 'buscar', component: BuscarComponent, canActivate: [GuardService] },
   { path: 'reporte', component: ReporteComponent, canActivate: [GuardService] },
+  { path: 'perfil', component: PerfilComponent, canActivate: [GuardService] },
   { path: 'login', component: LoginComponent },
   {
     path: 'recuperar', component: RecuperarComponent, children: [

@@ -31,9 +31,16 @@ export class GuardService implements CanActivate {
       //SI EL TOKEN ESTA EXPIRADO
       let token = sessionStorage.getItem(environment.TOKEN_NAME);
       if(!helper.isTokenExpired(token)){
-        //SI TIENES EL ROL NECESARIO
         
         let url = state.url;
+        console.log(url);
+
+        if(url === "/perfil"){
+          return true;
+        }
+
+        //SI TIENES EL ROL NECESARIO
+
         const decodedToken = helper.decodeToken(token);
 
         return this.menuService.listarPorUsuario(decodedToken.user_name).pipe(map((data: Menu[]) => {
