@@ -31,6 +31,9 @@ import { Not403Component } from './pages/not403/not403.component';
 import { RecuperarComponent } from './pages/login/recuperar/recuperar.component';
 import { TokenComponent } from './pages/login/recuperar/token/token.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { SignosComponent } from './pages/signos/signos.component';
+import { SignosEdicionComponent } from './pages/signos/signos-edicion/signos-edicion.component';
+import { PacienteDialogoComponent } from './pages/signos/signos-edicion/paciente-dialogo/paciente-dialogo.component';
 
 export function tokenGetter(){
   let tk = sessionStorage.getItem(environment.TOKEN_NAME);
@@ -58,7 +61,10 @@ export function tokenGetter(){
     Not403Component,
     RecuperarComponent,
     TokenComponent,
-    PerfilComponent    
+    PerfilComponent,
+    SignosComponent,
+    SignosEdicionComponent,
+    PacienteDialogoComponent    
   ],
   entryComponents: [MedicoDialogoComponent, DialogoComponentComponent],
   imports: [

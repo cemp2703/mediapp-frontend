@@ -1,3 +1,5 @@
+import { SignosEdicionComponent } from './pages/signos/signos-edicion/signos-edicion.component';
+import { SignosComponent } from './pages/signos/signos.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { TokenComponent } from './pages/login/recuperar/token/token.component';
 import { RecuperarComponent } from './pages/login/recuperar/recuperar.component';
@@ -46,6 +48,12 @@ const routes: Routes = [
   { path: 'buscar', component: BuscarComponent, canActivate: [GuardService] },
   { path: 'reporte', component: ReporteComponent, canActivate: [GuardService] },
   { path: 'perfil', component: PerfilComponent, canActivate: [GuardService] },
+  { 
+    path: 'signos', component: SignosComponent, children: [
+      { path: 'nuevo', component: SignosEdicionComponent },
+      { path: 'edicion/:id', component: SignosEdicionComponent }
+    ], canActivate: [GuardService]
+  },
   { path: 'login', component: LoginComponent },
   {
     path: 'recuperar', component: RecuperarComponent, children: [
