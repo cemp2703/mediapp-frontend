@@ -1,3 +1,5 @@
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { PacienteDialogoComponent } from './paciente-dialogo/paciente-dialogo.component';
 import { PacienteService } from './../../../_service/paciente.service';
 import { Observable } from 'rxjs';
 import { Paciente } from './../../../_model/paciente';
@@ -5,9 +7,8 @@ import { Signos } from './../../../_model/signos';
 import { SignosService } from './../../../_service/signos.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { MatAutocompleteTrigger } from '@angular/material';
 
 @Component({
   selector: 'app-signos-edicion',
@@ -29,15 +30,31 @@ export class SignosEdicionComponent implements OnInit {
 
   pacientesFiltrados: Observable<any[]>;
   pacientes: Paciente[] = [];
+  pacienteCreado : boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router : Router,
     private signosService : SignosService,
-    private pacienteService : PacienteService
+    private pacienteService : PacienteService,
+    private dialog : MatDialog,
+    private snack: MatSnackBar
   ) { }
 
   ngOnInit() {
+
+    this.pacienteService.pacienteCambio.subscribe( data => {
+      this.pacienteCreado = true;
+      this.form.controls['paciente'].setValue(data[0]);
+      this.listarPacientes();
+      this.pacienteSeleccionado = data[0];
+    });
+
+    this.pacienteService.mensajeCambio.subscribe(data => {
+      this.snack.open(data, 'AVISO', {
+        duration: 2000
+      });
+    });
     
     this.form = new FormGroup({
       'id' : new FormControl(0),
@@ -89,13 +106,12 @@ export class SignosEdicionComponent implements OnInit {
 
     let signo = new Signos();
     signo.idSignos = this.form.value['id'];
-    signo.paciente = this.form.value['paciente'];
+    //signo.paciente = this.form.value['paciente'];
+    signo.paciente = this.pacienteSeleccionado;
     signo.fecha = this.form.value['fecha'];
     signo.temperatura = this.form.value['temperatura'];
     signo.pulso = this.form.value['pulso'];
     signo.ritmoRespiratorio = this.form.value['ritmoRespiratorio'];
-    //seteando el valor de paciente obtenido
-    signo.paciente = this.pacienteSeleccionado;
 
     console.log(signo);
 
@@ -127,7 +143,12 @@ export class SignosEdicionComponent implements OnInit {
     this.pacienteSeleccionado = e.option.value;
   }
 
-  filtrarPacientes(val : any){    
+  filtrarPacientes(val : any){
+    if(this.pacienteCreado){
+      this.pacienteCreado = false;
+      return 
+    }
+        
     if (val != null && val.idPaciente > 0) {
       return this.pacientes.filter(option =>
         option.nombres.toLowerCase().includes(val.nombres.toLowerCase()) || option.apellidos.toLowerCase().includes(val.apellidos.toLowerCase()) || option.dni.includes(val.dni));
@@ -140,6 +161,12 @@ export class SignosEdicionComponent implements OnInit {
   listarPacientes() {
     this.pacienteService.listar().subscribe(data => {
       this.pacientes = data;
+    });
+  }
+
+  abrirDialogo(){
+    this.dialog.open(PacienteDialogoComponent, {
+      width: '250px'
     });
   }
 

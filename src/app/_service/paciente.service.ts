@@ -29,7 +29,7 @@ export class PacienteService {
   }
 
   registrar(paciente: Paciente) {
-    return this.http.post(this.url, paciente);
+    return this.http.post<Paciente>(this.url, paciente);
   }
 
   modificar(paciente: Paciente) {
